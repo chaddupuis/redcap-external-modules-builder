@@ -1,0 +1,9 @@
+services:
+  composebuilder:
+    build:
+      context: ./phpcompose/
+    image: rc-composer-builder-image
+    container_name: rc-composer 
+    volumes:
+      - ./modules:/usr/app/modules
+    command:  sh -c 'cd /usr/app/modules && find . -type d -name "*_*" -exec /usr/local/bin/composer -d {} install \; && find . -type d -name "*_*" -exec /usr/local/bin/composer -d {} update \;'
